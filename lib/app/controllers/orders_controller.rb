@@ -4,20 +4,9 @@ class OrdersController < ActionController::Base
   layout 'application'
   
   def new
-    # unless logged_in?
-    #   redirect_to login_url and return
-    # end
-    @order = Order.new(params[:order] ||
-      {     
-        :card_type          => 'visa',
-        :card_number        => '4569819806389761', # Login to Paypal Sandbox, view Personal account info
-        :card_verification  => '444',
-        :first_name         => 'Dean',
-        :last_name          => 'Castle'
-      }
-    )
+    @order = Order.new(params[:order])
     @order.billing_address = BillingAddress.new(params[:billing_address])
-    # @billing_address = BillingAddress.new(params)
+
     logger.info "total_price: #{@current_cart.total_price}"
     if @current_cart.total_price.zero?
       flash[:error] = "Please add items to your cart before attempting to complete an order."
@@ -31,12 +20,11 @@ class OrdersController < ActionController::Base
     @order.billing_address = BillingAddress.new(params[:billing_address])
     
     if @order.save
-      # @billing_address.save
       if @order.purchase
-        # Notifications.deliver_order(@order, @billing_address)
-        Notifications.deliver_order(@order)
+        Notification.deliver_order(@order)
         render :action => "success"
       else
+        logger.info "order errors = #{@order.errors.to_yaml}"
         render :action => "failure"
       end
     else

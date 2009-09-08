@@ -65,7 +65,6 @@
               = f.label :billing_state, "State"
             .form_elementInput
               = select :billing_address, :billing_state, state_select_options
-              / = state_select :billing_address, :billing_state, :country => 'US', :options => {:selected => nil}
               = f.error_message_on :billing_state
           %li
             .form_elementLabel

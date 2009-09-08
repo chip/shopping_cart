@@ -1,0 +1,16 @@
+Thank you for your order!
+
+
+= "Order #: #{@order.id}\n\n"
+
+
+- @order.cart.line_items.collect do |i| 
+  = "Item Name: #{i.product.name}"
+  = "Description: #{i.product.description}"
+  = "Price: #{number_to_currency(i.unit_price)}"
+  = "Quantity: #{i.quantity}"
+  = "Item Total: #{number_to_currency(i.full_price)}"
+  = "------------------------------------------------------\n\n"
+
+
+= "Order Total: #{number_to_currency(@order.cart.total_price)}"

@@ -8,7 +8,9 @@ class Order < ActiveRecord::Base
   attr_accessor :card_number, :card_verification
   
   def purchase
-    logger.info "credit_card=#{credit_card.to_yaml}\nprice_in_cents=#{price_in_cents}"
+    logger.info "credit_card=#{credit_card.to_yaml}"
+    logger.info "price_in_cents=#{price_in_cents}"
+    logger.info "purchase_options=#{purchase_options.to_yaml}"
     response = GATEWAY.purchase(price_in_cents, credit_card, purchase_options)
     transactions.create!(:action => "purchase", :amount => price_in_cents, :response => response)
     cart.update_attribute(:purchased_at, Time.now) if response.success?
@@ -27,16 +29,14 @@ class Order < ActiveRecord::Base
   
   def purchase_options
     options = {:ip => ip_address}
-    if RAILS_ENV['development']
-      options.merge!(
-        :billing_address  => {
-          :address1 => "155 Crystal Beach Drive",
-          :city     => "Destin",
-          :state    => "FL",
-          :country  => "US",
-          :zip      => "32541"
+    options.merge!(
+      :billing_address  => {
+        :address1       => billing_address.address1,
+        :city           => billing_address.city,
+        :state          => billing_address.billing_state,
+        :zip            => billing_address.zip,
+        :country        => billing_address.country
       })
-    end
     options
   end
   

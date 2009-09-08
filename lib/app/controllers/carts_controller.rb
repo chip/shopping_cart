@@ -1,12 +1,10 @@
 class CartsController < ActionController::Base   
   include ShoppingCart
   before_filter :get_cart
+  layout 'application'
   
   def show
-    logger.info "show action"
-    # @current_cart = get_cart
-    # @line_items = @current_cart.line_items
-    render :partial => '/shopping_cart/cart', layout => true
+    render :partial => 'cart', :layout => 'application'
   end
   
   def edit

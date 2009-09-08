@@ -103,7 +103,7 @@ module ShoppingCart #:nodoc
     end
     
     def self.copy_view_files
-      %w(carts orders products).each do |dir|
+      %w(carts notification orders products).each do |dir|
         view_directory = File.join(RAILS_ROOT, "app/views/#{dir}")
         if File.exist?(view_directory)
           puts "#{view_directory} already exists.  Skipping directory creation...\n"
@@ -116,29 +116,36 @@ module ShoppingCart #:nodoc
           source_file = File.join(File.dirname(__FILE__), "../assets", "views", dir, file)
           destination_file = File.join(RAILS_ROOT, "app/views/#{dir}", File.basename(file))
           next if source_file =~ /\.$/
-          if File.exists?(destination_file)
-            puts "#{destination_file} already exists.  Skipping file copy...\n"
-          else
-            puts "Copying #{source_file} to #{destination_file}\n"
-            FileUtils.cp(source_file, destination_file)
-          end
+          file_copy(source_file, destination_file)
         end
       end
       puts "================================DONE===========================================\n"
     end
-    
+
+    def self.copy_models
+      file = "notification.rb"
+      source_file = File.join(File.dirname(__FILE__), "../assets", "models", file)
+      destination_file = File.join(RAILS_ROOT, "app/models", File.basename(file))
+      file_copy(source_file, destination_file)
+      puts "================================DONE===========================================\n"      
+    end
+        
     def self.copy_stylesheet
       file = "shopping_cart.css"
       source_file = File.join(File.dirname(__FILE__), "../assets", "stylesheets", file)
       destination_file = File.join(RAILS_ROOT, "public/stylesheets", File.basename(file))
+      file_copy(source_file, destination_file)
+      puts "Include shopping_cart.css from your layout\n\n"
+      puts "================================DONE===========================================\n"      
+    end
+    
+    def self.file_copy(source_file, destination_file)
       if File.exists?(destination_file)
         puts "#{destination_file} already exists.  Skipping file copy...\n"
       else
         puts "Copying #{source_file} to #{destination_file}\n"
         FileUtils.cp(source_file, destination_file)
       end
-      puts "Include shopping_cart.css from your layout\n\n"
-      puts "================================DONE===========================================\n"      
     end
   end
 end
