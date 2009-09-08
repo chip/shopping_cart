@@ -1,0 +1,41 @@
+- form_tag url_for(:controller => 'carts', :action => 'update', :id => @current_cart.id), :method => 'put' do
+  %fieldset
+    %legend#cart_legend Your Shopping Cart
+
+    %br
+    %table#line_items
+      %tr
+        %th
+          Product
+        %th
+          Qty
+        %th.price
+          Price
+        %th.line_item_subtotal
+          Subtotal
+      
+      - if @line_items.count.zero?
+        %tr
+          %td{:colspan => 4} Shopping Cart is Empty
+      - else 
+        = render :partial => 'carts/line_item', :collection => @line_items
+        %tr
+          %td.total.price{:colspan => 4, :align => 'right'}
+            %br
+            Amount total:
+            = number_to_currency @current_cart.total_price
+        - if ['edit', 'update'].include?(params[:action]) && !@line_items.count.zero?
+          %tr
+            %td.submit_button{:colspan => 4, :align => 'right'}
+              %br
+              %br
+              = submit_tag('Update Quantities')        
+              %br
+    %p
+      - unless params[:action] == 'index' && params[:controller] == 'products'
+        %a.link_cont_shopping{ :href => '/products', :title => 'Continue Shopping' }
+          %span
+            Continue Shopping
+        %a.link_proceed_checkout{ :href => '/orders/new', :title => 'checkout' }
+          %span
+            Proceed to Checkout

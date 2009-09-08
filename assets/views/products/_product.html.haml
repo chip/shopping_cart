@@ -1,0 +1,4 @@
+= "#{product.name} #{product.description} #{number_to_currency(product.price)}"
+= link_to 'Add to Cart', line_items_path(:product_id => product), :method => :post
+%br
+%br

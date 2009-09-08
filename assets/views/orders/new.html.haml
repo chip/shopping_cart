@@ -1,0 +1,83 @@
+#interior
+  %h1 New Order
+  
+  / = error_message_on :order, :base
+  / = error_messages_for :order
+  = render :partial => 'carts/cart'
+      
+  - form_for @order do |f|
+    
+    %fieldset
+      %p.title
+        Please fill out all information below.
+      %ul
+        %li
+          .form_elementLabel
+            = f.label :card_type
+          .form_elementInput
+            = f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]
+            = f.error_message_on :card_type
+        %li
+          .form_elementLabel  
+            = f.label :card_number
+          .form_elementInput
+            = f.text_field :card_number
+            = f.error_message_on :card_number
+        %li
+          .form_elementLabel
+            = f.label :card_verification, "Card Verification Value (CVV)"
+          .form_elementInput
+            = f.text_field :card_verification
+            = f.error_message_on :card_verification
+        %li
+          .form_elementLabel
+            = f.label :card_expires_on
+          .form_elementInput
+            = f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true
+        %li
+          .form_elementLabel
+            = f.label :first_name
+          .form_elementInput
+            = f.text_field :first_name
+            = f.error_message_on :first_name
+        %li
+          .form_elementLabel
+            = f.label :last_name
+          .form_elementInput
+            = f.text_field :last_name
+            = f.error_message_on :last_name
+        
+        - fields_for :billing_address do |ba|        
+          %li
+            .form_elementLabel
+              = f.label :address1, "Address"
+            .form_elementInput
+              = ba.text_field :address1
+              = f.error_message_on :address1
+          %li
+            .form_elementLabel
+              = f.label :city
+            .form_elementInput
+              = ba.text_field :city
+              = f.error_message_on :city
+          %li
+            .form_elementLabel
+              = f.label :billing_state, "State"
+            .form_elementInput
+              = select :billing_address, :billing_state, state_select_options
+              / = state_select :billing_address, :billing_state, :country => 'US', :options => {:selected => nil}
+              = f.error_message_on :billing_state
+          %li
+            .form_elementLabel
+              = f.label :zip
+            .form_elementInput
+              = ba.text_field :zip
+              = f.error_message_on :zip
+          %li
+            .form_elementLabel
+              = f.label :country
+            .form_elementInput
+              = select :billing_address, :country, country_select_options
+              = f.error_message_on :country
+        %li
+          = f.submit "Place Order"

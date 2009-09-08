@@ -1,0 +1,64 @@
+ShoppingCart
+============
+
+This Ruby on Rails plugin provides simple shopping cart functionality 
+that uses with ActiveMerchant for merchant gateway processing.
+
+*Tested with Rails 2.3.3
+
+
+Example
+=======
+    ./script/plugin install git@github.com:chip/shopping_cart.git
+    rake shopping_cart:setup
+    
+    This will create:
+      * A database migration file
+      * Views for carts, orders and products
+        
+    # You will need to setup the following in routes.rb:
+      # Root route is only necessary if you don't already have one setup
+      # map.root :controller => 'products', :action => 'index'
+      # Remaining routes for shopping cart plugin
+      map.resources :products
+      map.current_cart 'cart', :controller => 'carts', :action => 'show', :id => 'current'
+      map.resources :carts
+      map.resources :orders
+
+
+    # You will need to setup your merchant gateway credentials (Example provided is for Paypal):
+    
+    # (config/development.rb):
+    ActiveMerchant::Billing::Base.mode = :test
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+      :login      => "your paypal sandbox login",
+      :password   => "your paypal sandbox password",
+      :signature  => "your paypal sandbox signature"
+    )
+    
+    # (config/test.rb):
+    config.after_initialize do
+      ActiveMerchant::Billing::Base.mode = :test
+      ::GATEWAY = ActiveMerchant::Billing::BogusGateway.new
+    end
+    
+    # (config/production.rb):
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+      :login      => "your paypal login",
+      :password   => "your paypal password",
+      :signature  => "your paypal signature"
+    )
+    
+    
+    # You will need to install and configure your gems:
+    sudo gem install activemerchant haml highline
+    
+    # You will need to restart your web server after editing environment.rb:
+    config.gem 'haml'
+    config.gem "activemerchant", :lib => "active_merchant", :version => "1.4.1"
+    
+    # Optionally, you can populate your products table with a few sample products
+    rake shopping_cart:products
+
+
+Copyright (c) 2009 Chip Castle Dot Com, Inc. released under the MIT license

@@ -1,0 +1,22 @@
+- new_or_existing = line_item.new_record? ? 'new' : 'existing' 
+- prefix = "cart[#{new_or_existing}_line_item_attributes]"
+
+- fields_for "#{prefix}[]", line_item do |item_form|
+  %tr{:class => "#{cycle :odd, :even}", :id => "line_item_#{line_item.id}"}
+    %td
+      / = product_image(line_item.product.id)
+      = h line_item.product.name
+    %td.qty{:align => 'right'}
+      - if ['edit', 'update'].include?(params[:action])
+        = text_field_tag "#{prefix}[#{line_item.id}][quantity]", line_item.quantity, :size => 3, :index => nil
+      - else
+        = line_item.quantity
+    %td.price{:align => 'right'}
+      = number_to_currency(line_item.unit_price)
+    %td.item_subtotal{:align => 'right'}
+      = number_to_currency(line_item.unit_price * line_item.quantity)
+      
+    - if ['edit', 'update'].include?(params[:action])
+      %td
+        = link_to "Delete", line_item, :method => :delete
+        

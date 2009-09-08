@@ -1,0 +1,333 @@
+body {
+  background: #fff top left repeat-x;
+  font-size: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Trebuchet MS", Arial, "Helvetica Neue", Helvetica, sans-serif; }
+
+ul {
+  color: #000; }
+
+h1, h2, h3, h4, h5, ul, li, ol, p, blockquote, cite {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+h1.sub_head {
+  padding-top: 1.5em !important; }
+  h1.sub_head span {
+    font-size: .7em;
+    color: #555; }
+
+h2 {
+  color: #000;
+  font-weight: bold;
+  font-size: 1em;
+  padding: .4em 0 .6em 0; }
+
+.clear {
+  clear: both; }
+
+.link_out {
+  color: red; }
+
+.link_out:hover {
+  background: red !important;
+  color: #fff; }
+
+.denote {
+  font-style: italic;
+  color: red !important; }
+
+.failed {
+  color: #ff0000 !important;
+  border: 1px solid #ff0000 !important;
+  background-color: #f1d0d0 !important;
+  padding: .5em !important; }
+
+.succeeded {
+  color: #0b4d20 !important;
+  border: 1px solid #1e8941 !important;
+  background-color: #d0f1db !important;
+  padding: .5em !important; }
+
+a {
+  color: #3c677f;
+  text-decoration: underline;
+  background: none; }
+
+a:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #3c677f; }
+  a:hover img {
+    border: none;
+    background: none; }
+
+a:active {
+  outline: none; }
+
+a img {
+  border: none; }
+
+a.link_img:hover {
+  background: none; }
+
+a:focus {
+  outline: none;
+  border: none; }
+
+.clear {
+  clear: both; }
+
+#flash_home {
+  height: 159px !important;
+  width: 899px !important;
+  padding: 0 !important;
+  margin: 0 !important; }
+
+#container {
+  width: 898px;
+  padding: 0;
+  margin: 0 auto;
+  background: none; }
+
+#wrapper {
+  width: 100%;
+  min-width: 899px; }
+
+  #wrapper #content {
+    width: 899px;
+    height: auto;
+    clear: both;
+    margin-bottom: 10px;
+    min-height: 600px; }
+    #wrapper #content #home {
+      width: 899px;
+      height: auto;
+      padding: 0;
+      clear: both;
+      background: #fff;
+      min-height: 300px;
+      padding: 0;
+      background: none; }
+      #wrapper #content #interior .no_list li {
+        list-style: none !important; }
+      #wrapper #content #interior fieldset {
+        margin-top: 1em; }
+      #wrapper #content #interior form {
+        width: 60%; }
+        #wrapper #content #interior form fieldset {
+          border: none;
+          margin-top: 1em; }
+          #wrapper #content #interior form fieldset p.title {
+            padding-bottom: .5em; }
+          #wrapper #content #interior form fieldset legend {
+            border: none !important;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #A71D1B; }
+          #wrapper #content #interior form fieldset ol li,           #wrapper #content #interior form fieldset ul li {
+            list-style: none !important; }
+          #wrapper #content #interior form fieldset ol li.alt {
+            background: #ddd; }
+          #wrapper #content #interior form fieldset ol li.alt_textarea {
+            background: #ddd;
+            height: 110px; }
+          #wrapper #content #interior form fieldset ol li.form_rowText {
+            font-size: .8em; }
+          #wrapper #content #interior form fieldset ol li.form_rowAlt {
+            font-size: .8em; }
+          #wrapper #content #interior form fieldset ol li {
+            line-height: 2.2em;
+            height: 2.2em;
+            padding-left: .4em;
+            padding-right: .4em;
+            padding-top: .3em;
+            clear: both; }
+            #wrapper #content #interior form fieldset ol li .label {
+              float: left;
+              width: 48%; }
+            #wrapper #content #interior form fieldset ol li .textarea {
+              float: right;
+              width: 48%; }
+              #wrapper #content #interior form fieldset ol li .textarea textarea {
+                height: 100px !important;
+                width: 216px !important;
+                border: 1px solid #333; }
+            #wrapper #content #interior form fieldset ol li .input {
+              float: right;
+              width: 48%; }
+              #wrapper #content #interior form fieldset ol li .input input {
+                border: 1px solid #333; }
+              #wrapper #content #interior form fieldset ol li .input span input {
+                width: 60px;
+                margin-right: 3px;
+                float: left; }
+      #wrapper #content #interior h1 {
+        padding: .5em 0;
+        font-size: 1.3em;
+        color: #000; }
+      #wrapper #content #interior h1#header_mag span {
+        font-size: .7em;
+        color: #555; }
+      #wrapper #content #interior h1#interior_header {
+        padding-top: 150px;
+        padding-bottom: .5em;
+        font-size: 1.3em;
+        color: #a81d1d; }
+      #wrapper #content #interior h2 {
+        font-size: 1.2em;
+        padding-top: 1em;
+        color: #000; }
+        #wrapper #content #interior h2 span {
+          font-size: .8em;
+          color: #555;
+          display: block; }
+      #wrapper #content #interior h3 {
+        font-size: 1em;
+        padding: .6em 0 .5em 0; }
+      #wrapper #content #interior p {
+        font-size: .8em;
+        color: #555;
+        line-height: 1.4em;
+        text-align: justify;
+        padding: .4em 0; }
+      #wrapper #content #interior p.product_name {
+        font-size: 1.2em;
+        color: #333; }
+      #wrapper #content #interior p.product_nav {
+        padding: .6em 0 0 0; }
+      #wrapper #content #interior ul {
+        font-weight: bold !important; }
+        #wrapper #content #interior ul li {
+          font-size: .8em; }
+          #wrapper #content #interior ul li ul {
+            padding-left: 2em;
+            font-size: 1.1em;
+            color: #000; }
+      #wrapper #content #interior table#line_items tbody tr {
+        width: 800px; }
+        #wrapper #content #interior table#line_items tbody tr th {
+          text-align: left;
+          padding-right: 1em;
+          padding-bottom: .3em;
+          border-bottom: 1px solid #555;
+          margin-bottom: .8em; }
+        #wrapper #content #interior table#line_items tbody tr td {
+          padding-right: 1em; }
+        #wrapper #content #interior table#line_items tbody tr td.total {
+          font-weight: bold; }
+
+#footer_container {
+  background: #b7b6aa url('/images/ui/back_footer.jpg') top left no-repeat;
+  border-top: 1px solid #8c8b85;
+  min-height: 50px;
+  border-bottom: 1px solid #8c8b85;
+  width: 100%; }
+  #footer_container #footer {
+    clear: both;
+    width: 899px;
+    margin: 0 auto; }
+    #footer_container #footer ul {
+      padding: 1em; }
+      #footer_container #footer ul li.link_last {
+        border-right: none; }
+      #footer_container #footer ul li {
+        float: left;
+        padding: .1em .5em;
+        font-size: .8em;
+        border-right: 1px solid #555; }
+        #footer_container #footer ul li a {
+          color: #000;
+          text-decoration: none; }
+        #footer_container #footer ul li a:hover {
+          color: #fff;
+          background: #000; }
+
+.product_info ul {
+  float: left !mportant; }
+
+h1.order_success {
+  color: green !important; }
+
+h1.order_failure {
+  color: red !important; }
+
+.link_cont_shopping {
+  display: block;
+  background: #fff url('/images/ui/btn_cont_shopping.jpg') top left no-repeat;
+  width: 158px;
+  height: 34px;
+  float: left;
+  margin-right: 10px; }
+  .link_cont_shopping span {
+    display: none; }
+
+.link_proceed_checkout {
+  display: block;
+  background: #fff url('/images/ui/btn_proceed_checkout.jpg') top left no-repeat;
+  width: 169px;
+  height: 34px;
+  float: left;
+  margin-right: 10px; }
+  .link_proceed_checkout span {
+    display: none; }
+
+p.product_name {
+  font-size: 1.2em; }
+
+fieldset {
+  margin-top: 1em; }
+
+form {
+  width: 60%; }
+  form fieldset {
+    border: none;
+    margin-top: 1em; }
+    form fieldset p.title {
+      padding-bottom: .5em; }
+    form fieldset legend {
+      border: none !important;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #A71D1B; }
+    form fieldset ul li.alt {
+      background: #ddd; }
+    form fieldset ul li.alt_textarea {
+      background: #ddd;
+      height: 110px; }
+    form fieldset ul li {
+      line-height: 2.2em;
+      height: 2.2em;
+      padding-left: .4em;
+      padding-right: .4em;
+      padding-top: .3em;
+      clear: both; }
+      form fieldset ul li .form_elementLabel {
+        float: left;
+        width: 48%; }
+      form fieldset ul li .form_elementInput {
+        float: right;
+        width: 48%; }
+        form fieldset ul li .form_elementInput textarea {
+          height: 100px !important;
+          width: 216px !important;
+          border: 1px solid #333; }
+        form fieldset ul li .form_elementInput input {
+          border: 1px solid #333; }
+
+.back_button {
+  float: left;
+  font-size: .9em;
+  padding: 22px 10px 10px 10px; }
+
+h2.product_header { 
+  padding: 10px; }
+
+#interior {
+  color: #000 !important; }
+  #interior p.question {
+    font-weight: bold;
+    color: #000 !important; }
+

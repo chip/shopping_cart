@@ -1,0 +1,14 @@
+module ShoppingCart #:nodoc:  
+  module Routing #:nodoc:  
+    module MapperExtensions 
+      def products 
+        @set.add_route("/products", {:controller => "products_controller", :action => "index"})  
+      end
+      
+      def orders 
+        @set.add_route("/orders", {:controller => "orders_controller", :action => "index"})  
+      end
+    end
+  end 
+end 
+ActionController::Routing::RouteSet::Mapper.send :include, ShoppingCart::Routing::MapperExtensions 
