@@ -7,12 +7,14 @@ module ShoppingCart #:nodoc
       begin
         puts "STEP 1 -- Generate ShoppingCart migration file"
         generate_migration
-        write_migration_content
+        puts "==============================================================================="
         puts "STEP 2 -- ShoppingCart plugin view files and stylesheet"
         copy_view_files
         copy_stylesheet
+        puts "==============================================================================="
         puts "Followup Steps"
         puts "STEP 3 -- run the task 'rake db:migrate'\n"
+        puts "==============================================================================="
         puts "STEP 4 -- edit the file config/routes.rb"
         puts <<-END_ROUTES
           map.root :controller => 'products', :action => 'index'
@@ -22,6 +24,7 @@ module ShoppingCart #:nodoc
           map.resources :orders
           
         END_ROUTES
+        puts "==============================================================================="
         puts "STEP 5 -- Shopping Cart Gateway setup"
         puts <<-END_GATEWAY
         (config/development.rb):
@@ -46,9 +49,12 @@ module ShoppingCart #:nodoc
         )
         
         END_GATEWAY
+        puts "==============================================================================="
         puts "STEP 6 -- Install Ruby Gems:\nsudo gem install activemerchant haml highline\n\n"
+        puts "==============================================================================="
         puts "STEP 7 -- Edit environment.rb:\nconfig.gem 'haml'\nconfig.gem \"activemerchant\", :lib => \"active_merchant\", :version => \"1.4.1\"\nRestart web server\n\n"
-        puts "STEP 8 (optional) -- run the task 'rake shopping_cart:products'\n"
+        puts "==============================================================================="
+        puts "STEP 8 (optional) -- run the task 'rake shopping_cart:products'\n\n"
       rescue StandardError => e
         p e
       end
@@ -66,6 +72,7 @@ module ShoppingCart #:nodoc
         puts "ruby script/generate migration create_shopping_cart_tables"
         puts %x{ruby script/generate migration create_shopping_cart_tables}
         puts "================================DONE==========================================="
+        write_migration_content(migration_filename)
       end
     end
   
@@ -73,23 +80,25 @@ module ShoppingCart #:nodoc
       File.join(File.dirname(__FILE__), "../assets", "migration", "create_shopping_cart_tables.rb")
     end
  
-    def self.write_migration_content
-      migration_filename = get_migration_filename
+    def self.write_migration_content(migration_filename)
       if File.exists?(migration_filename)
         puts "#{migration_filename} already exists, so skipping migration creation\n"
       else
-        File.open(migration_file, "wb"){|f| f.write(File.read(migration_source_file))}
+        File.open(migration_filename, "wb") { |f| f.write(File.read(migration_source_file)) }
       end
     end
  
     def self.get_migration_filename
       copy_to_path = File.join(RAILS_ROOT, "db", "migrate")
-      migration_filename =
-        Dir.entries(copy_to_path).collect do |file|
-          number, *name = file.split("_")
-          file if name.join("_") == "create_shopping_cart_tables.rb"
-        end.compact.first
-      File.join(copy_to_path, migration_filename)
+      migration_filename = Dir.entries(copy_to_path).collect do |file|
+        next if file =~ /\./
+        # puts "file: #{file}"
+        number, *name = file.split("_")
+        # puts "number: #{number}\nname: #{name}"
+        file if name.join("_") == "create_shopping_cart_tables.rb"
+      end.compact.first || "#{Time.now.strftime("%Y%m%d%H%M%S")}_create_shopping_cart_tables.rb"
+      # puts "\n\n****\nreturning #{File.join(copy_to_path, migration_filename)}\n\n"
+      return File.join(copy_to_path, migration_filename)
     end
     
     def self.copy_view_files
@@ -118,7 +127,7 @@ module ShoppingCart #:nodoc
     end
     
     def self.copy_stylesheet
-      file = "shopping_cart.sass"
+      file = "shopping_cart.css"
       source_file = File.join(File.dirname(__FILE__), "../assets", "stylesheets", file)
       destination_file = File.join(RAILS_ROOT, "public/stylesheets", File.basename(file))
       if File.exists?(destination_file)
