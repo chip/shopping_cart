@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Shopping cart : Ruby on Rails plugin with simple Shopping Cart functionality that uses ActiveMerchant for gateway processing" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Shopping cart</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/chip/shopping_cart">View on GitHub</a>
+
+          <h1 id="project_title">Shopping cart</h1>
+          <h2 id="project_tagline">Ruby on Rails plugin with simple Shopping Cart functionality that uses ActiveMerchant for gateway processing</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/chip/shopping_cart/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/chip/shopping_cart/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>ShoppingCart</h1>
+
+<p>This Ruby on Rails plugin provides simple shopping cart functionality 
+that uses with ActiveMerchant for merchant gateway processing.</p>
+
+<p>*Tested with Rails 2.3.3</p>
+
+<h1>Example</h1>
+
+<pre><code>./script/plugin install git@github.com:chip/shopping_cart.git
+rake shopping_cart:setup
+
+This will create:
+  * A database migration file
+  * Views for carts, orders and products
+
+# You will need to setup the following in routes.rb:
+  # Root route is only necessary if you don't already have one setup
+  # map.root :controller =&gt; 'products', :action =&gt; 'index'
+  # Remaining routes for shopping cart plugin
+  map.resources :products
+  map.current_cart 'cart', :controller =&gt; 'carts', :action =&gt; 'show', :id =&gt; 'current'
+  map.resources :carts
+  map.resources :line_items
+  map.resources :orders
+
+
+# You will need to setup your merchant gateway credentials (Example provided is for Paypal):
+
+# (config/development.rb):
+ActiveMerchant::Billing::Base.mode = :test
+::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+  :login      =&gt; "your paypal sandbox login",
+  :password   =&gt; "your paypal sandbox password",
+  :signature  =&gt; "your paypal sandbox signature"
+)
+
+# (config/test.rb):
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+  ::GATEWAY = ActiveMerchant::Billing::BogusGateway.new
+end
+
+# (config/production.rb):
+::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+  :login      =&gt; "your paypal login",
+  :password   =&gt; "your paypal password",
+  :signature  =&gt; "your paypal signature"
+)
+
+
+# You will need to install and configure your gems:
+sudo gem install activemerchant haml highline
+
+# You will need to restart your web server after editing environment.rb:
+config.gem 'haml'
+config.gem "activemerchant", :lib =&gt; "active_merchant", :version =&gt; "1.4.1"
+
+# Optionally, you can populate your products table with a few sample products
+rake shopping_cart:products
+</code></pre>
+
+<p>Copyright (c) 2009 Chip Castle Dot Com, Inc. released under the MIT license</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Shopping cart maintained by <a href="https://github.com/chip">chip</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
